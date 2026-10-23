@@ -1,33 +1,33 @@
-# 기여도 계산 기준
+# Evidence-based contribution records
 
-이 지표는 팀이 사전에 합의하고 검토한 기여 기록을 일관되게 계산하는 참고 지표입니다. 완전한 객관성이나 개인의 능력을 판정하지 않습니다. 성적·저자 순서·보상·인사 평가의 자동 결정에 사용하지 않습니다.
+This is consistent arithmetic from a team's agreed records, not a fully objective measure of effort or ability. Do not automatically decide grades, authorship, rewards, or employment outcomes from it.
 
-## 기준을 먼저 합의하기
+## Agree before work
 
-기본 배점은 산출물 50, 검증 20, 동료 검토 20, 조율과 문서화 10입니다. contribution/rubric.json에서 프로젝트 시작 전에 조정합니다. 합은 100이어야 합니다. 분야별 기여 기회가 다른 구성원에게 기계적으로 같은 기준을 적용하지 말고 팀이 역할과 배점을 먼저 합의하세요.
+Default category weights are deliverables 50, validation 20, peer-review activity 20, and coordination/documentation 10. Teams may adjust contribution/rubric.json before work; weights must total 100. Agree on roles and opportunities rather than imposing mechanically identical expectations.
 
-각 활동의 난도·범위에 따라 1~5점의 계획 점수와 완료 기준, 공동 기여 비율을 작업 전에 합의합니다. 계획 근거를 plan_ref에 기록하고 합의 후 plan_approved를 yes로 표시합니다. 변경 시 이유와 팀 합의 기록을 남깁니다. 커밋 수·추가 줄 수·AI 생성량은 배점 근거가 아닙니다.
+For each activity, agree on a 1–5 planned-point value, scope, acceptance criteria, and joint credit shares. Record the plan reference and only then mark plan_approved yes. Record reasons and agreement for changes. Do not count commits, lines, generated code, speaking frequency, or worklog length.
 
-문헌 조사와 원고 작성은 산출물, 재현 실험은 검증, PR·연구 설계 피드백은 동료 검토, 회의 결정 기록과 일정 조율은 조율로 기록할 수 있습니다. 같은 작업을 여러 범주에 중복 등록하지 않습니다. 작업을 잘게 쪼개 점수를 늘리지 않도록 사전에 범위를 검토합니다.
+Literature review and writing can be deliverables; reproducibility checks are validation; PR or research-design feedback is review; meeting decisions and scheduling can be coordination. Do not double-count the same work or split activities merely to increase points.
 
-## 입력 파일
+## Inputs and formula
 
-- activities.csv: 활동 ID, 범주, 계획 점수, 상태, 계획 합의 근거, 완료 기준, 완료 근거, 검토자, 기준 충족 여부
-- shares.csv: 활동 ID, 가명 참여자 ID, 합의한 기여 비율. 한 활동의 합은 정확히 1
-- rubric.json: 범주별 배점
+- activities.csv: activity ID, category, planned points, status, agreement reference, criteria, evidence, reviewer, and criteria_passed.
+- shares.csv: activity ID, pseudonymous participant ID, and agreed share; each activity totals exactly 1.
+- rubric.json: category weights.
 
-공개 템플릿에는 가상 예제만 있습니다. 실제 개인별 기여 기록은 생성한 비공개 저장소에 보관하고 팀이 합의한 접근 범위에서만 사용합니다. 가명은 P01처럼 사용하며 실명 대조표는 저장소에 두지 않습니다.
+Participant category points = category weight × sum of accepted activity planned points × participant credit share / all planned points in that category.
 
-## 계산식
+Sum category points for the participant total. The team total reflects accepted work against the complete plan, up to 100. Credit composition divides participant points by the accepted team total. Unfinished work scores zero and does not redistribute its budget; unplanned categories are flagged.
 
-개인 범주 점수 = 범주 배점 × 그 사람이 승인 완료한 활동의 계획점수와 기여비율의 곱 합계 ÷ 해당 범주 전체 계획점수
+Accepted activities need evidence, an independent reviewer, and criteria_passed=yes. A contributor to that activity cannot approve it. Missing evidence, duplicate IDs, invalid shares, or unagreed plans put calculation on hold.
 
-개인 합계는 범주 점수의 합입니다. 팀 합계는 전체 계획 중 승인 완료한 비중을 반영하며 최대 100입니다. 팀 내 기여 구성비는 개인 점수를 팀 합계로 나눈 값입니다. 미완료 활동은 0이며 배점이 사라지거나 다른 범주로 재분배되지 않습니다. 계획 없는 범주는 보고서에 표시합니다.
+## Review and privacy
 
-accepted는 완료 근거·별도 검토자·criteria_passed=yes가 있어야 합니다. 공동 기여자 자신은 해당 활동의 완료 승인자가 될 수 없습니다. 근거 누락, 중복 ID, 잘못된 비율, 미합의 계획이면 산정을 보류합니다.
+The code checks inputs and arithmetic, not linked content, actual effort, or reviewer identity. Give each member a chance to identify missing contributions and challenge errors. Return disputed activities to in_progress until reviewed. Consider undocumented mentoring and coordination.
 
-## 확인과 이의 제기
+Keep real records in the private project with agreed access. Use P01-style pseudonyms; keep real-name mappings outside the repository. Separate synthetic fixtures before real use. The fixture produces P01=25, P02=35, P03=20, team=80, and credit composition 31.25%, 43.75%, 25%. This is not a ranking of people.
 
-코드는 입력 형식과 산술을 검사하며 링크 내용, 실제 노력, 승인자의 진위는 확인하지 않습니다. 팀원에게 계산 근거와 누락 기여를 확인할 기회를 주고, 이의가 있는 활동은 accepted 대신 in_progress로 되돌려 재검토합니다. 조율·멘토링 등 기록되지 않은 기여를 반드시 별도로 검토합니다.
+## Optional peer ratings and behavioral rubric
 
-가상 예제는 P01 25점, P02 35점, P03 20점, 팀 승인 완료점수 80점입니다. 팀 내 기여 구성비는 각각 31.25%, 43.75%, 25%입니다. 사람의 가치나 성과 순위를 의미하지 않습니다.
+Teams may add [peer ratings](peer_review.md) when agreed before work. **Review activity credit** rewards a documented review task; **peer ratings** describe observed collaboration and are a separate instrument. The current calculator does not read or combine peer ratings. Report the two measures side by side by default. Specify scale, item weights, minimum raters, privacy, missing-data handling, and appeals before collection.
