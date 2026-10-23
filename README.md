@@ -10,6 +10,9 @@ A team agreement starter for ChatGPT Edu, Codex, Linear, and GitHub. Surface dif
 4. Confirm the goal, scope, deliverables, and acceptance criteria together. Keep unanswered questions visible.
 5. Discuss tasks in [Linear](docs/linear_tasks.md), implement one small agreed change, and request a PR review.
 6. Share [redacted worklogs](docs/worklogs/README.md) and optionally use [contribution records and peer review](docs/contribution.md).
+7. Prepare a research write-up with contribution evidence, run the [pre-submission AI review](docs/writeup_review.md), and have teammates verify findings and approve the final version.
+
+The aim is to improve how teams work with AI: compare understanding before assigning tasks, preserve evidence while experimenting, and challenge the draft before submission. AI drafts and flags concerns; people confirm agreements, validate findings, and decide what to submit.
 
 ## What each tool does
 
@@ -34,7 +37,7 @@ The repository skill is in `.agents/skills/team-project-start`. Reopen the proje
 
 Implemented: local pattern checks, Git-index checks, an opt-in pre-commit hook, redacted worklog drafts, and arithmetic from approved contribution records.
 
-Manual starter materials: agreement questionnaire, comparison prompt, approval records, issue map, and optional peer-review rubric. There is no agreement web app, automatic approval verification, live Linear monitoring, or automatic peer-score calculation. Actual team impact has not been measured.
+Manual starter materials: agreement questionnaire, comparison prompt, approval records, issue map, optional peer-review rubric, research write-up guide, and pre-submission AI review prompt and response ledger. There is no agreement web app, automatic approval verification, live Linear monitoring, automatic peer-score calculation, or automated paper-review service. Actual team impact has not been measured.
 
 ## Install local checks
 
