@@ -63,7 +63,7 @@ def compute(tasks, shares, weights):
 def main():
     p=argparse.ArgumentParser()
     p.add_argument('--data-dir',default='contribution')
-    p.add_argument('--output',help='새 JSON 파일. 기존 파일은 덮어쓰지 않습니다.')
+    p.add_argument('--output',help='New JSON output file; existing files are not overwritten.')
     args=p.parse_args()
     try:
         folder=Path(args.data_dir)
