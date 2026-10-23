@@ -38,4 +38,6 @@ Contribution arithmetic uses agreed plans and accepted evidence. Optional peer r
 
 ## Completion report
 
+For requested research-write-up reviews, use docs/writeup_review.md. Match the manuscript to the supplied source/result versions; report inaccessible evidence. Separate demonstrated errors, plausible concerns, and editing suggestions, with exact locations and verification steps. Never invent citations, experiments, contribution attribution, or approvals. Teammates verify findings and record dispositions before deciding readiness. Reading artifacts is not experimental reproduction, and AI review is not scientific certification or permission to submit.
+
 Report changed files and reasons, actual checks, remaining questions, and what has been shared. Commit, push, issue creation, comments, and PR publication require authorization within the user's request. Merge and research validation are separate decisions.
