@@ -4,3 +4,5 @@
 __pycache__/
 masked-review*/
 local-review*/
+.local-work/
+.private/
