@@ -47,4 +47,6 @@ If requested, use docs/peer_review.md to agree behavioral scales, weights, minim
 
 ## Report completion
 
+For a graduate research or competition write-up, use docs/writeup_review.md when pre-submission review is requested. Freeze a manuscript version and evidence manifest, run an evidence-linked AI review, and let teammates verify findings and record fixes or disagreements. Distinguish missing evidence, demonstrated defects, and speculative concerns. Do not fabricate experiments, citations, member credit, rank causality, or human approval. A review prompt and ledger are manual aids, not an automated review service. Read-only inspection and actual reproduction must be reported separately. The team, not AI, decides readiness and authorizes submission.
+
 Report actual local and remote locations, the first task link or draft, applicable instructions, executed checks, limits, and necessary next steps. Distinguish manual materials, proposed extensions, and implemented code. Do not ask for confirmation when no user action is needed.
