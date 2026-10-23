@@ -1,0 +1,4 @@
+interface:
+  display_name: "팀플 시작 도우미"
+  short_description: "비공개 팀 저장소부터 첫 기여와 보안 점검까지 쉽게 시작하기"
+  default_prompt: "$team-project-start를 사용해 우리 팀의 프로젝트를 비공개 저장소로 시작하고 첫 작업과 공유 전 점검을 준비해줘."
