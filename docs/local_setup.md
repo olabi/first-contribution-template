@@ -53,6 +53,23 @@ python3 tools/contribution_score.py
 
 Optional [GitHub Desktop](https://desktop.github.com/download/) downloads differ for Intel and Apple Silicon; check About This Mac.
 
+## Optional Node.js for web and npm-based projects
+
+This template's Python scripts do not require Node.js. Install it when your project uses a JavaScript/TypeScript app, a package.json file, or a tool whose official instructions require Node.js. Prefer the project's documented version; otherwise choose a supported LTS release from the [official Node.js download page](https://nodejs.org/en/download).
+
+On Windows, choose the official Windows installer for your x64 or ARM64 system and reopen PowerShell after installation. On macOS, choose the official macOS installer supported by your OS and Apple Silicon or Intel hardware. If your team already uses a Node version manager, follow that existing setup rather than installing a competing copy. Homebrew and Node version managers are optional.
+
+Check in a new terminal on either platform:
+
+```sh
+node --version
+npm --version
+```
+
+The standard Node.js installation includes npm; verify both commands. Record the versions with project checks. If commands are not found, check PATH and reopen the terminal and Codex. Do not change machine-wide script-execution policy to fix an npm command error; on Windows, try `npm.cmd --version` and follow administrator guidance for managed devices.
+
+This template has no package.json, so there is no npm install step. For a different project, read its instructions and package scripts before running dependency installation: package lifecycle scripts can execute code. Node installation has not been performed or tested on this device as part of this documentation update.
+
 ## Git identity and first check
 
 Commit author names and email addresses become part of Git history. Configure a team-approved display name and the exact GitHub noreply address shown in your account settings locally; do not submit that address in chat.
