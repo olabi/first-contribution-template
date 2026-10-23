@@ -5,7 +5,7 @@ A team agreement starter for ChatGPT Edu, Codex, Linear, and GitHub. Surface dif
 ## Start here
 
 1. Use **Use this template → Create a new repository → Private**. Verify the Private label and invite your team. A public fork cannot be independently converted to private.
-2. Follow [Windows and macOS setup](docs/local_setup.md) and open your private clone in Codex.
+2. Follow [Windows and macOS setup](docs/local_setup.md) for Git and Python, plus optional Node.js when a web/npm project needs it, and open your private clone in Codex.
 3. Read the [beginner workflow](docs/workflow.md). Individually answer the [agreement questions](docs/team_agreement.md), then compare interpretations in ChatGPT Edu.
 4. Confirm the goal, scope, deliverables, and acceptance criteria together. Keep unanswered questions visible.
 5. Discuss tasks in [Linear](docs/linear_tasks.md), implement one small agreed change, and request a PR review.
