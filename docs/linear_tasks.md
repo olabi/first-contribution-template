@@ -1,18 +1,30 @@
-# Linear 첫 작업 카드
+# Linear: team communication and first task cards
 
-팀의 Linear 프로젝트에서 아래 내용을 수동 등록하고 실제 이슈 링크를 PR에 연결합니다. GitHub만 사용하는 팀은 GitHub 이슈로 등록할 수 있습니다.
+Linear is where teammates discuss work through issue comments and mentions: questions, feedback, blockers, clarification, and agreement changes. GitHub holds the versioned agreement and deliverables. Link the exact agreement version and relevant PR from each issue.
 
-## FC 1 실행 안내 보완
+Register these cards manually in your real project or use GitHub Issues as the chosen tracker. Example IDs are not real service records. Integrations and synchronization require separate setup. Do not send messages or assign teammates without authorization.
 
-목적: 초보자가 가상 분석 예제를 실행하도록 README를 보완합니다.
-완료 기준: 저장소 루트에서의 Python 명령, 출력 항목의 의미, 실제 실행 여부를 기록합니다. 코드와 데이터 수정은 범위 밖입니다.
+## Suggested card fields
 
-## FC 2 공유 전 검사 확인
+Goal; agreement version and criterion; deliverable; excluded work; acceptance criteria; prerequisites; proposed/confirmed owner; reviewer; deadline or unresolved timing; evidence; clarification thread.
 
-목적: 원문 값이 출력되지 않는 커밋 검사를 이해합니다.
-완료 기준: 가상 입력은 별도 로컬 임시 폴더에서 사용하고 커밋하지 않습니다. 차단 종류와 줄 번호, 원본 보존을 확인합니다. 검사기를 끄는 방식으로 해결하지 않습니다.
+## FC-01: Improve run instructions
 
-## FC 3 안내와 협업 개선
+Goal: help a beginner run the synthetic analysis.
+Acceptance: document the Python command from the repository root, output meanings, and whether it was actually executed. Changing analysis code and data is outside scope.
 
-목적: 초보자가 막힌 단계를 다음 사람에게 남깁니다.
-완료 기준: 개인정보 없는 피드백과 문서 개선 PR, 확인한 환경을 기록합니다.
+## FC-02: Understand sharing checks
+
+Goal: inspect the guard without printing source values.
+Acceptance: use synthetic inputs in a separate local temporary folder, never commit them, and confirm finding types, line numbers, and original preservation. Do not disable the guard.
+
+## FC-03: Improve onboarding
+
+Goal: document a step where a beginner got stuck.
+Acceptance: provide de-identified feedback, a documentation PR, and the tested environment.
+
+## Discussion example
+
+“The assignment specifies a five-minute presentation but not a dashboard. Should dashboard work stay out of scope? Please check agreement v1, scope item S2.” After confirmation, update the agreement through review and link the revised version back to the issue.
+
+Private individual peer ratings should use a separately agreed restricted channel, not an unrestricted comment thread.
