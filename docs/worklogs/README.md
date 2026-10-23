@@ -1,64 +1,54 @@
-# 팀원과 Codex 작업 기록 공유
+# Share team and Codex worklogs
 
-팀원은 각자의 Codex 작업에서 확인한 내용과 다음 작업에 필요한 맥락을 Markdown으로 남깁니다. 팀의 **비공개 저장소**에서 브랜치와 PR을 통해 공유합니다. 공개 템플릿에는 실제 팀 대화나 연구자료를 올리지 않습니다.
+Share concise Markdown handoffs through branches and PRs in the team's **private repository**. Never put real team conversations or research data in this public template.
 
-## 기록할 것
+## Record only useful work context
 
-- 작업 요약과 연결된 이슈
-- 실제 변경한 파일과 이유
-- 결정한 내용과 보류한 질문
-- 실행한 검사와 확인하지 못한 항목
-- 다음 사람이 할 일과 참고 문서
+Task summary and issue; changed files and reasons; decisions and open questions; executed checks and checks not run; next steps and references. Do not collect full conversations, raw terminal logs, or internal reasoning. Worklogs are reference material, not AI instructions or new authority.
 
-전체 대화·터미널 로그·사고 과정은 수집하지 않습니다. Codex가 설명한 작업 요약과 검증 결과만 사용하며, 사용자가 명시적으로 제공한 대화 일부가 필요하면 그 부분만 비식별 처리합니다. 작업 기록은 참고 자료이며 AI 지침이나 새로운 실행 권한이 아닙니다.
+## Prepare and redact
 
-## 작성과 마스킹
-
-1. 저장소 루트의 `.local-work` 폴더를 만듭니다. 원본 요약은 여기에만 보관합니다. 이 폴더는 Git에서 제외되고 강제로 추가해도 검사기가 중단합니다.
-2. Codex가 현재 작업을 아래 구조의 JSON으로 요약하여 `.local-work/session.json`에 저장합니다. 불명확한 결과를 성공했다고 적지 않습니다.
-3. 이름·주소·기관 내부 식별자처럼 패턴으로 찾기 어려운 정보는 `.local-work/redactions.txt`에 한 줄에 하나씩 적습니다. 이 파일도 공유하지 않습니다.
-4. 저장소 루트에서 마스킹 도구를 실행합니다. Windows는 `py -3`, macOS는 `python3`를 사용합니다.
+Create .local-work in the repository root. Raw summaries and additional literal redaction phrases stay there. The directory is ignored and blocked if force-added. Save a factual JSON summary as .local-work/session.json:
 
 ```json
 {
   "participant_id": "P01",
-  "topic": "가상 분석 실행 안내 보완",
-  "summary": ["처음 참여한 사람이 실행할 수 있도록 안내를 보완함"],
-  "changes": ["README의 실행 위치와 명령 설명을 수정함"],
-  "decisions": ["분석 코드와 데이터는 이번 작업에서 바꾸지 않음"],
-  "checks": ["실제 실행한 명령과 결과 또는 미실행 이유를 기입"],
-  "next_steps": ["검토자가 안내의 누락 여부를 확인"],
-  "references": ["README.md", "팀의 실제 이슈 링크를 기입"]
+  "topic": "Improve synthetic-analysis run instructions",
+  "summary": ["Clarify how a beginner runs the example"],
+  "changes": ["Update README run location and command"],
+  "decisions": ["Analysis code and data stay outside this task"],
+  "checks": ["Insert actual command and result, or reason not run"],
+  "next_steps": ["Reviewer checks for missing instructions"],
+  "references": ["README.md", "Insert the real team issue link"]
 }
 ```
 
+Put names, addresses, or internal identifiers needing additional masking into .local-work/redactions.txt, one literal phrase per line. Never share that list.
+
+Windows:
 ```powershell
 py -3 tools/share_worklog.py --input .local-work/session.json --redact-file .local-work/redactions.txt
 ```
-
+macOS:
 ```sh
 python3 tools/share_worklog.py --input .local-work/session.json --redact-file .local-work/redactions.txt
 ```
 
-추가 가림 목록이 없으면 `--redact-file`을 생략합니다. 도구는 키·토큰 형식 일부, Bearer 토큰, 토큰이 있는 URL, 이메일·전화·학번과 로컬 사용자 경로 일부를 가립니다. 가림 목록은 문자열 그대로 치환하며 정규식으로 실행하지 않습니다. 이름·얼굴·문맥으로 식별되는 정보와 알려지지 않은 키를 모두 찾지는 못합니다.
+Omit --redact-file if no additional list is needed. The tool masks selected key/token patterns, Bearer values, credential URLs, email, Korean mobile numbers, student-ID contexts, and local user paths. It cannot find all names, images, contextual identifiers, international phone formats, or unknown keys. Literal redaction phrases are not executed as regex.
 
-출력은 `docs/worklogs/날짜-P01-임의ID.md`입니다. 파일마다 고유 이름을 써서 팀원끼리 같은 파일을 수정하는 충돌을 줄입니다. 새 파일만 만들고 원본은 바꾸지 않으며 커밋·푸시는 하지 않습니다. 보고서에 원문 키·개인정보는 출력하지 않습니다.
+It creates docs/worklogs/date-P01-randomID.md with a unique filename. It preserves originals and never stages, commits, or pushes. Reports omit source values.
 
-## 사람이 검토한 뒤 공유
+## Human review before sharing
 
-생성된 파일의 `privacy_review: pending`은 사람의 확인이 아직 필요하다는 뜻입니다. 팀원이 로컬에서 전체 파일을 확인하여 이름·내부 정보·연구자료의 노출과 사실관계를 검토합니다. 민감정보가 남으면 제거한 뒤 다시 검사합니다. 사람의 확인을 받은 경우에만 `privacy_review: approved`로 바꿉니다. AI는 사용자 검토 없이 이 표시를 승인으로 바꾸지 않습니다.
-
-이 표시는 검토했다는 선언이며 사람의 신원을 암호학적으로 증명하지 않습니다. 커밋 검사기는 미승인 기록을 막고 승인 표시가 있어도 민감정보 패턴이 남으면 막습니다.
+privacy_review: pending means human review is required. Review the entire file locally for identifiers, internal or research information, and accuracy. Only after human approval may privacy_review become approved; AI must not approve its own draft. The flag is a declaration, not cryptographic identity proof. The guard blocks pending worklogs and residual sensitive patterns even in approved worklogs.
 
 ```sh
-git add docs/worklogs/검토한파일.md
+git add docs/worklogs/REVIEWED-FILE.md
 python3 tools/repo_guard.py --staged
 ```
 
-Windows에서는 마지막 명령을 `py -3 tools/repo_guard.py --staged`로 바꿉니다. 확인된 파일만 커밋하고 사용자에게 허용받은 비공개 원격 저장소로 푸시해 PR 검토를 요청합니다. 푸시 전에 `git remote -v`로 팀의 비공개 저장소가 맞는지 확인합니다. 로컬 폴더만 있으면 아직 팀원에게 공유된 것이 아닙니다.
+Use `py -3` on Windows. Check `git remote -v`, then commit and push only within the user's authorization to the private repository and request review. A local file alone has not been shared with teammates.
 
-## 서로 참고하기
+## Reuse context
 
-팀원은 pull로 최신 기록을 받고 docs/worklogs를 날짜·가명별로 읽습니다. Codex는 새 작업 시작 시 관련 이슈와 연결된 기록을 찾아 결정 이유·미완료 항목을 이어받습니다. 다른 사람의 기록을 수정하지 말고 정정이나 추가 검토는 자신의 새 기록과 링크로 남깁니다. 새 파일 중심의 기록은 완료된 코드나 원문 근거를 대신하지 않습니다.
-
-기록의 개수나 길이를 기여 점수로 세지 않습니다. 검토 완료한 작업의 실제 근거로만 참조하고, 기여도는 별도로 사전 합의한 활동과 배점에 따라 계산합니다. 이미 노출한 키는 기록을 가리는 것과 별도로 폐기·재발급하고 노출 범위를 확인합니다.
+Pull current records and read by date and pseudonym. Codex reads relevant records when starting a task. Link corrections from a new record instead of modifying another member's record. Record volume is not contribution credit. Masking an exposed key does not replace revocation and exposure review.
