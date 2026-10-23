@@ -1,33 +1,37 @@
-# 공유 전 점검과 노출 대응
+# Sharing checks and exposure response
 
-## 두 단계로 확인
+## Instructions plus code
 
-AGENTS.md는 AI가 따라야 할 지침입니다. tools/repo_guard.py는 Git index의 실제 커밋 후보를 검사합니다. 지침을 읽으라는 요청만으로 실수를 막았다고 판단하지 않습니다.
+AGENTS.md guides AI behavior. `tools/repo_guard.py` independently inspects Git-index blobs. Reading an instruction is not proof that mistakes were prevented.
 
-수동 점검은 `python tools/repo_guard.py --staged`입니다. macOS는 `python3`를 사용합니다. `--tracked`는 index의 추적 파일 전체를 검사합니다. 점검 도구와 Git이 실행 가능한 환경이 필요합니다.
+Run `python3 tools/repo_guard.py --staged` for changed index entries or `--tracked` for all tracked index entries. On Windows, use `py -3`. Git and Python must be available.
 
-## 자동 실행 연결
+## Connect the checks
 
-- 각 복제본에서 `python tools/install_guard_hook.py`를 한 번 실행하면 pre-commit 훅을 설치합니다. 기존 훅이나 core.hooksPath 설정이 있으면 덮어쓰지 않고 중단합니다.
-- 개인정보 패턴도 사람이 해결할 때까지 커밋을 중단합니다. 필요한 연락처 등 오탐이 있어도 자동 통과시키지 않습니다. 초보자 실습용의 엄격한 규칙입니다.
-- `.github/workflows/repository-guard.yml`은 PR에서 추적 파일 전체를 검사하는 CI 예제입니다. GitHub에 올리고 Actions를 허용한 후 실제 실행을 확인해야 합니다.
-- 저장소 관리자가 `Repository guard / guard` 작업을 필수 상태 검사로 설정하고 정책·검사 코드·워크플로 변경에 신뢰할 수 있는 검토자를 지정하세요. 필요한 플랜과 정책 지원 여부는 관리자가 확인합니다.
-- 로컬 훅은 사용자가 건너뛸 수 있습니다. CI도 같은 PR에서 바뀔 수 있으므로 필수 검사 이름만으로 검사 무력화를 막았다고 판단하지 않습니다. 운영 시 신뢰된 검사 배포와 정책 변경 검토를 함께 적용하세요.
+- Run `tools/install_guard_hook.py` once per clone. Existing hooks and core.hooksPath are preserved; installation stops instead of overwriting them.
+- Personal-data patterns block the commit until reviewed and resolved, including false positives. This teaching template is intentionally strict.
+- `.github/workflows/repository-guard.yml` demonstrates a tracked-file check for PRs. Verify Actions actually runs in the new repository.
+- Administrators configure the `Repository guard / guard` required check and trusted review of policy, checker, and workflow changes, subject to plan support.
+- Hooks are bypassable, and CI can be changed in the same PR. A required check name alone does not prevent tampering. Review policy changes and consider trusted checker distribution for operational use.
 
-## 차단 범위
+## Coverage and limits
 
-키·토큰 형식 일부, 자격증명 대입 일부, 이메일·한국 휴대전화·학번 패턴, 민감한 파일명, 필수 지침 누락을 검사합니다. 2MB를 넘는 파일, 바이너리, 지원하지 않는 확장자, 심볼릭 링크·서브모듈·충돌은 중단합니다. 보고서에 파일 내용이나 민감 값을 출력하지 않습니다.
+Checks cover selected token shapes, credential assignments, email addresses, Korean mobile-number patterns, student-ID contexts, sensitive filenames, and required policies. International phone numbers and organization-specific identifiers are not generally covered. Use a local redaction list and human review for additional identifiers.
 
-보고서의 파일 번호는 정렬된 검사 대상 목록 순서입니다. 로컬에서 `git diff --cached --name-only --diff-filter=ACMR` 또는 `git ls-files`로 파일을 찾고 원문은 공유하지 마세요.
+Files above 2 MB, binaries, unsupported extensions, symlinks, submodules, and conflicts stop the check. Logs omit raw content. File numbers follow the sorted checked-file list; locate files locally with `git diff --cached --name-only --diff-filter=ACMR` or `git ls-files`.
 
-아직 검사하지 않는 대상은 이미지·문서 메타데이터·과거 커밋·GitHub PR 본문·Linear 게시물입니다. Linear 등록과 AI 입력 전에는 해당 텍스트를 로컬 파일로 저장하여 tools/share_check.py로 검사해야 합니다. 상시 감시나 외부 게시 자동 차단은 이 예제에 포함하지 않습니다.
+Images, document metadata, past commits, PR descriptions, and Linear posts are not automatically checked. Save proposed external text locally and use tools/share_check.py before posting. No continuous monitoring or outbound interception is implemented.
 
-## 발견했을 때
+## If exposure is suspected
 
-키가 의심되면 공유를 중단합니다. 이미 노출했다면 소유자가 해당 서비스에서 폐기·재발급하고 댓글·로그·PR·커밋 등 노출 범위를 확인합니다. 값은 보고서에 적지 않습니다. 개인정보는 목적상 필요한지 사람이 확인하고, 불필요한 정보는 제거·가명 처리한 사본을 다시 검토합니다.
+Stop sharing. If already exposed, have the owner revoke and replace the credential and inspect comments, logs, PRs, and commits. Do not repeat the value. Minimize unnecessary personal information in a separate redacted copy and review it again.
 
-`.gitignore`는 과거 기록을 지우지 못합니다. Git 이력 재작성은 관리자와 협의하세요. 자동 마스킹으로 원본이나 저장소 이력을 바꾸지 않습니다. 검사가 패턴을 찾지 못해도 사람이 변경 내용을 검토해야 합니다.
+`.gitignore` does not erase history. Coordinate history rewriting with an administrator. Automatic masking does not modify originals or history. A pattern-free result still needs human review.
 
-## 팀 작업 기록
+## Team worklogs
 
-원본 요약과 추가 가림 목록은 .local-work에만 보관합니다. 이 경로와 .private 경로는 강제로 Git에 추가해도 차단합니다. tools/share_worklog.py는 가린 Markdown 초안을 docs/worklogs에 생성하며 전송은 하지 않습니다. 사람의 검토를 받은 기록만 privacy_review를 approved로 바꾸어 커밋 후보에 올립니다. 승인 표시가 있어도 민감정보 패턴이 남으면 차단합니다. 승인 표시는 검토 선언이며 실제 사람의 검토를 기술적으로 보증하지 않습니다. 실제 기록은 팀의 비공개 저장소에서만 공유합니다.
+Raw summaries and additional redaction lists stay in .local-work. This directory and .private are blocked even if force-added. tools/share_worklog.py creates a pending-review MD draft without uploading it. Only after human review may privacy_review become approved. Approved records with residual patterns still block. The flag is a review declaration, not verified human identity. Keep actual worklogs in the team's private repository.
+
+## Peer-review privacy
+
+Agree on access and retention before collecting individual ratings. Do not publish personal ratings, real-name mappings, or sensitive feedback in the public template or unrestricted issue comments. Pseudonyms do not guarantee anonymity in a small team.
