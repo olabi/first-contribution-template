@@ -27,10 +27,10 @@ def git(*args):
     return result.stdout
 
 def main():
-    parser = argparse.ArgumentParser(description='Git index의 실제 커밋 후보를 검사합니다.')
+    parser = argparse.ArgumentParser(description='Check actual commit candidates in the Git index.')
     mode = parser.add_mutually_exclusive_group(required=True)
-    mode.add_argument('--staged', action='store_true', help='변경된 커밋 후보만 검사')
-    mode.add_argument('--tracked', action='store_true', help='현재 index의 추적 파일 전체 검사')
+    mode.add_argument('--staged', action='store_true', help='Check changed index entries only')
+    mode.add_argument('--tracked', action='store_true', help='Check all tracked entries in the current index')
     args = parser.parse_args()
     findings = []
     try:
