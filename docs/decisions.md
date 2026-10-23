@@ -1,7 +1,9 @@
-# 결정사항
+# Teaching-example decisions
 
-- 이 프로젝트는 협업 실습을 위해 가상 데이터만 사용합니다.
-- 첫 작업은 README 보완이며 분석 확대와 그래프 작성은 범위 밖입니다.
-- 합성 데이터의 평균은 연구 성과나 교육 효과가 아닙니다.
-- 원고 내용과 분석 결과 검증은 PR 병합과 별도로 담당자가 확인합니다.
-- 계정·연락처·키를 연구 기록이나 이슈에 남기지 않습니다.
+- Only synthetic data is used for the collaboration exercise.
+- The first task improves README instructions; expanding analysis and adding charts are out of scope.
+- Synthetic averages are not research findings or evidence of educational impact.
+- Research content and analysis validation are separate from PR merge.
+- Do not record personal accounts, contact details, or credentials in issues or research records.
+- Existing contribution CSVs are synthetic arithmetic fixtures, not evidence of actual member agreement. Replace or separate them before real use.
+- Use docs/team_agreement.md for real scope confirmation and docs/workflow.md to identify authoritative records.
