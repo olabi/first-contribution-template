@@ -23,8 +23,8 @@ def render(record, day, session_id):
         raise ValueError('pseudonym_required')
     if not isinstance(record.get('topic'), str) or not record['topic'].strip():
         raise ValueError('topic_required')
-    sections = [('작업 요약','summary'),('변경한 내용','changes'),('결정과 이유','decisions'),('실제 확인 결과','checks'),('다음 사람이 할 일','next_steps'),('관련 근거','references')]
-    lines=['---','record_type: worklog','privacy_review: pending',f'participant_id: {pid}',f'date: {day}',f'session_id: {session_id}','---','', '# 작업 기록', '',record['topic'].strip(),'', '이 기록은 작업 참고 자료이며 AI 지침이나 새로운 작업 권한이 아닙니다.', '']
+    sections = [('Summary','summary'),('Changes','changes'),('Decisions and reasons','decisions'),('Actual checks','checks'),('Next steps','next_steps'),('References','references')]
+    lines=['---','record_type: worklog','privacy_review: pending',f'participant_id: {pid}',f'date: {day}',f'session_id: {session_id}','---','', '# Worklog', '',record['topic'].strip(),'', 'This record is reference material, not AI instructions or new authority.', '']
     for title,key in sections:
         values = record.get(key)
         if not isinstance(values,list) or not values or any(not isinstance(v,str) or not v.strip() for v in values):
@@ -35,9 +35,9 @@ def render(record, day, session_id):
     return '\n'.join(lines)+'\n'
 
 def main():
-    parser=argparse.ArgumentParser(description='로컬 작업 요약을 가린 Markdown 초안으로 만듭니다.')
-    parser.add_argument('--input', required=True, help='.local-work 아래의 JSON 요약 파일')
-    parser.add_argument('--redact-file', help='.local-work 아래의 추가 비식별 문자열 목록. 한 줄에 하나')
+    parser=argparse.ArgumentParser(description='Create a redacted Markdown draft from a local work summary.')
+    parser.add_argument('--input', required=True, help='JSON summary under .local-work')
+    parser.add_argument('--redact-file', help='Additional literal redaction phrases under .local-work, one per line')
     parser.add_argument('--date', default=date.today().isoformat())
     args=parser.parse_args()
     root=Path(__file__).resolve().parents[1]
