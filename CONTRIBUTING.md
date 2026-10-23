@@ -1,11 +1,11 @@
-# 참여 방법
+# Contributing
 
-1. README와 docs/decisions.md를 읽고 담당자와 작업 범위를 확인합니다.
-2. 팀이 허용한 브랜치에서 하나의 이슈만 작업합니다. 기존 작업이 있으면 먼저 확인합니다.
-3. 수정한 파일과 PR 초안을 로컬에서 점검합니다. 키와 개인정보를 올리지 않습니다.
-4. 변경 전후와 실제 실행 여부를 확인하고 커밋합니다. 공유 전 확인을 마친 뒤 푸시합니다.
-5. PR 본문에 Linear 이슈 링크, 변경 이유, 확인 결과, 미확인 항목을 적습니다.
-6. 검토자가 확인한 후 팀 규칙에 따라 병합합니다. 연구 검증은 별도 완료 기준으로 판단합니다.
+1. Read README.md, AGENTS.md, SECURITY.md, and the confirmed team agreement.
+2. Check the task tracker for blockers and an existing owner. Agree on one small task, its acceptance criteria, and reviewer.
+3. Use an allowed branch, such as `docs/TEAM-12-run-instructions`; replace the example with the real issue ID. Preserve existing work.
+4. Check only intended share candidates locally. Never publish credentials or unnecessary personal information.
+5. Verify changes and the actual staged contents before committing and authorized pushing.
+6. In the PR, link the issue, agreement version, affected criteria, checks, limitations, and relevant reviewed worklog.
+7. After review, merge under team rules. Research validation remains separate from PR merge.
 
-API 키는 개인 인증 절차와 승인된 비밀 관리 수단으로 다룹니다. 팀원에게 토큰 문자열을 전달하지 않습니다.
-점검 경고 보고에는 파일 위치와 종류만 적습니다. 원문 값은 포함하지 않습니다.
+Use official authentication and approved secret storage. Never pass token strings between teammates. Report suspected exposure by type and location without including the value.
