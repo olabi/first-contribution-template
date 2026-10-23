@@ -16,7 +16,7 @@ RULES = [
     ('credential_assignment', 'block', re.compile(r'''(?im)\b(?:api[_-]?key|access[_-]?token|client[_-]?secret|password)\b\s*[:=]\s*["']?(?!\s|\[|<|\$)[A-Za-z0-9_+/=.-]{8,}''')),
     ('email', 'review', re.compile(r'(?<![A-Za-z0-9._%+-])[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?![A-Za-z0-9_.+-])')),
     ('kr_mobile', 'review', re.compile(r'(?<!\d)01[016789][- ]?\d{3,4}[- ]?\d{4}(?!\d)')),
-    ('student_id_context', 'review', re.compile(r'(?:학번|student[_ ]?id)\s*[:=：]?\s*\d{4}[- ]?\d{5,6}', re.I)),
+    ('student_id_context', 'review', re.compile(r'(?:\uD559\uBC88|student[_ ]?id)\s*[:=：]?\s*\d{4}[- ]?\d{5,6}', re.I)),
     ('local_user_path', 'review', re.compile(r'(?:[A-Za-z]:[\\/]Users[\\/][^\\/\s"\'<>]+|/(?:Users|home)/[^/\s"\'<>]+)')),
 ]
 MAX_SIZE = 2 * 1024 * 1024
@@ -41,9 +41,9 @@ def analyze(text):
     return found, text
 
 def main():
-    parser = argparse.ArgumentParser(description='공유 후보 UTF-8 파일을 로컬에서 점검합니다. 원문 값은 출력하지 않습니다.')
+    parser = argparse.ArgumentParser(description='Check explicit UTF-8 share candidates locally without printing source values.')
     parser.add_argument('files', nargs='+')
-    parser.add_argument('--masked-dir', help='선택 사항: 마스킹한 검토용 사본을 저장할 새 폴더. 원본은 보존합니다.')
+    parser.add_argument('--masked-dir', help='Optional new directory for redacted review copies. Originals are preserved.')
     args = parser.parse_args()
     reports, copies = [], []
     failed, blocked, review = False, False, False
