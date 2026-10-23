@@ -1,0 +1,7 @@
+activity_id,participant_id,share
+D1,P01,.5
+D1,P02,.5
+D2,P03,1
+V1,P03,1
+R1,P02,1
+C1,P01,1

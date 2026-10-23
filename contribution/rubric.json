@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "weights": {
+    "deliverable": 50,
+    "validation": 20,
+    "review": 20,
+    "coordination": 10
+  }
+}

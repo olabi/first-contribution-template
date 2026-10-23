@@ -1,0 +1,6 @@
+activity_id,category,planned_points,status,plan_approved,plan_ref,criteria,evidence_ref,reviewer_id,criteria_passed
+D1,deliverable,3,accepted,yes,docs/decisions.md,README 실행 안내 검토,README.md,P03,yes
+D2,deliverable,2,planned,yes,docs/decisions.md,한계점 문서 작성,,,
+V1,validation,2,accepted,yes,docs/decisions.md,가상 분석 실행 검증,scripts/analyze.py,P02,yes
+R1,review,1,accepted,yes,docs/decisions.md,README 누락 검토,README.md,P01,yes
+C1,coordination,1,accepted,yes,docs/decisions.md,결정사항 기록,docs/decisions.md,P02,yes
