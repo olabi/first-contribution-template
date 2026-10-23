@@ -14,7 +14,11 @@ These instructions apply to the entire repository. Before editing, read this fil
 
 Use docs/team_agreement.md to compare independently supplied answers. Distinguish assignment requirements, member interpretations, and AI suggestions. Cite sentence IDs; missing answers are unknown, not disagreement. Ask neutral questions and keep unresolved items visible. Only humans confirm agreement. Changes affecting scope require a recorded revision and reconfirmation.
 
-## Sensitive data and sharing
+## Scoped exploratory-work exception
+
+Within references/ only, follow references/AGENTS.md for exploratory notes and personal experiments. Those files may use provisional goals, lightweight checks, and no tracker issue or formal acceptance reviewer. This exception does not apply to production files outside references/, shared policy/checker changes, sensitive-data handling, publication authorization, or claims of verified research. Promotion into a main deliverable requires normal agreement, review, and verification.
+
+## Sensitive data and sharing rules
 
 - Do not request or copy API keys, tokens, passwords, or private keys into chat, Linear, GitHub, or logs. Use official sign-in flows.
 - Minimize names, contact details, student identifiers, and research-participant data. Redact a separate copy and preserve local originals.
