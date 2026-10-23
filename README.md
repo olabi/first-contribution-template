@@ -57,7 +57,11 @@ Improve this README by documenting how to run `scripts/analyze.py` from the repo
 
 Run `python3 tools/contribution_score.py` (Windows: `py -3`). Use agreed activity points, credit shares, evidence, and independent acceptance, not commit counts or generated code volume. The synthetic example totals 80 accepted points: P01=25, P02=35, P03=20. It is not a grade or an authorship decision. Optional peer ratings are reported separately; see [the rubric](docs/peer_review.md).
 
-## Privacy, reuse, and inspiration
+## Reference notes and personal experiments
+
+Use [references/](references/README.md) for early ideas, reading notes, and exploratory experiments. The folder has a scoped workflow exception: a formal task or finished result is not required for each note. Clearly label provisional and untested findings. Main deliverables still follow the agreed review process; privacy and sharing checks apply everywhere.
+
+## Privacy and reuse
 
 Real team records belong only in your private project. Issues, invitations, Secrets, integrations, hooks, and required-check settings are not automatically copied. All public examples are synthetic. Code and original documentation are MIT licensed; project research and third-party materials retain their own rights.
 
