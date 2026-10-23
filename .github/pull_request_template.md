@@ -1,17 +1,17 @@
-## 연결 이슈
-[실제 Linear 이슈 링크]
+## Linked task and agreement
+[Real issue URL, confirmed agreement version, affected acceptance criteria]
 
-## 변경 이유와 범위
-[어떤 파일을 왜 바꿨는지]
+## Reason and scope
+[Changed files and why; out-of-scope work]
 
-## 확인 결과
-[환경, 명령, 결과 또는 실행하지 못한 이유]
+## Verification
+[Environment, command, result, and checks not run]
 
-## 공유 전 점검
-[검사 범위, 결과와 미검사 항목. 키와 개인정보 원문을 적지 않음]
+## Sharing checks
+[Scope, outcome, and exclusions; do not include raw credentials or personal data]
 
-## 남은 질문과 검토 요청
-[아직 합의되지 않은 내용]
+## Dependencies and open questions
+[Blockers, unconfirmed assumptions, requested review]
 
-## 팀 작업 기록
-[해당하는 경우 사람이 검토한 docs/worklogs 파일 링크. 원본 대화는 첨부하지 않음]
+## Team handoff
+[Reviewed docs/worklogs record if applicable; never attach raw conversations]
