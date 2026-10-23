@@ -1,12 +1,24 @@
 """Check Git index blobs, not working-tree copies. Local only; no raw content logs."""
 import argparse
 import json
+import re
 import subprocess
 import sys
 from pathlib import PurePosixPath
 from share_check import analyze, MAX_SIZE, TEXT_SUFFIXES
 
 REQUIRED = ('AGENTS.md', 'SECURITY.md', 'tools/repo_guard.py', 'tools/share_check.py')
+
+def reviewed_worklog(text):
+    header = re.match(r'\A---\n(.*?)\n---(?:\n|\Z)',text.replace('\r\n','\n'),re.S)
+    if not header:return False
+    metadata = {}
+    for line in header.group(1).splitlines():
+        if ':' not in line:return False
+        key,value=line.split(':',1)
+        if key in metadata:return False
+        metadata[key]=value.strip()
+    return metadata.get('record_type')=='worklog' and metadata.get('privacy_review')=='approved' and bool(re.fullmatch(r'P\d{2,6}',metadata.get('participant_id','')))
 
 def git(*args):
     result = subprocess.run(['git', *args], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -39,6 +51,9 @@ def main():
         for number, name in enumerate(selected, 1):
             mode_value, oid = entries[name]
             path = PurePosixPath(name)
+            if any(part in {'.local-work', '.private'} for part in path.parts):
+                findings.append({'file_number': number, 'rule': 'local_raw_record_not_shareable', 'action': 'STOP'})
+                continue
             if path.name == '.env' or path.name.startswith('.env.') and path.name != '.env.example' or path.suffix.lower() in {'.pem', '.key', '.p12', '.pfx', '.keystore'}:
                 findings.append({'file_number': number, 'rule': 'sensitive_filename', 'action': 'STOP'})
                 continue
@@ -59,6 +74,9 @@ def main():
                 findings.append({'file_number': number, 'rule': 'encoding_manual_review_required', 'action': 'STOP'})
                 continue
             detected, _ = analyze(text)
+            if path.parts[:2] == ('docs', 'worklogs') and path.name != 'README.md':
+                if not reviewed_worklog(text):
+                    findings.append({'file_number': number, 'rule': 'worklog_human_review_required', 'action': 'STOP'})
             for item in detected:
                 findings.append({'file_number': number, **item, 'action': 'STOP'})
         print(json.dumps({'decision': 'STOP' if findings else 'NO_PATTERN_FOUND',
