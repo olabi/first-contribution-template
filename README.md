@@ -1,58 +1,61 @@
-# 첫 기여 협업 시작 템플릿
+# Same Assignment, Different Understanding
 
-Codex·Linear·GitHub가 낯선 팀원이 첫 작업을 이해하고 안전하게 기여하도록 돕는 한국어 템플릿입니다. 논문 공동연구, 개발 프로젝트, 팀플과 TF에서 사용할 수 있습니다.
+A team agreement starter for ChatGPT Edu, Codex, Linear, and GitHub. Surface different interpretations of a shared assignment before dividing the work. Suitable for coursework, joint research, software projects, and task forces.
 
-## 비공개 프로젝트로 시작하기
+## Start here
 
-이 공개 저장소에서 **Use this template → Create a new repository → Private**을 선택하세요. 생성 후 Private 표시를 확인하고 팀원을 초대하세요. 공개 Fork를 만든 뒤 비공개로 전환하는 방식은 사용할 수 없습니다.
+1. Use **Use this template → Create a new repository → Private**. Verify the Private label and invite your team. A public fork cannot be independently converted to private.
+2. Follow [Windows and macOS setup](docs/local_setup.md) and open your private clone in Codex.
+3. Read the [beginner workflow](docs/workflow.md). Individually answer the [agreement questions](docs/team_agreement.md), then compare interpretations in ChatGPT Edu.
+4. Confirm the goal, scope, deliverables, and acceptance criteria together. Keep unanswered questions visible.
+5. Discuss tasks in [Linear](docs/linear_tasks.md), implement one small agreed change, and request a PR review.
+6. Share [redacted worklogs](docs/worklogs/README.md) and optionally use [contribution records and peer review](docs/contribution.md).
 
-새 저장소의 이슈·권한·Secrets·Linear 연결과 로컬 훅은 각각 설정해야 합니다. 실제 연구자료·개인정보·키는 공개 템플릿에 올리지 마세요. 템플릿 개선 제안에는 가상 예제만 사용하세요.
+## What each tool does
 
-## Codex 스킬로 시작하기
+| Tool | Team role |
+|---|---|
+| ChatGPT Edu | Compare independent interpretations, cite supplied evidence, and draft questions and agreements |
+| Codex | Read repository instructions and the confirmed agreement; help implement and verify the agreed task |
+| Linear | Team communication and task coordination: issue comments, mentions, questions, blockers, owners, and current status |
+| GitHub | Versioned deliverables, design and agreement documents, redacted handoffs, and pull-request reviews |
 
-새 비공개 저장소를 복제한 폴더를 Codex에서 열고 다음과 같이 요청하세요.
+Linear discussions link to the approved agreement version in GitHub. Current task status belongs in Linear; avoid maintaining a second live status table in Markdown. Without Linear, use GitHub Issues as the single task tracker. Service integrations require separate setup; links do not automatically synchronize anything.
 
-`$team-project-start 우리 팀의 프로젝트를 시작하고 첫 작업과 공유 전 점검을 준비해줘.`
+## Use the Codex skill
 
-저장소의 `.agents/skills/team-project-start`에 스킬이 포함되어 있습니다. 스킬이 보이지 않으면 새 대화 또는 Codex 재시작 후 확인하세요. 이 스킬은 도구 설치 확인, 기존 프로젝트 합류 또는 비공개 저장소 시작, 첫 작업, 보안 점검과 근거 기반 기여도 계산을 안내합니다. 로그인·팀 초대·접근 권한을 자동으로 부여하지는 않습니다.
+Open the private repository in Codex and ask:
 
-## 처음 실행할 순서
+`$team-project-start Help our team compare our understanding of this assignment, confirm scope and completion criteria, and prepare our first task and sharing checks.`
 
-1. [Windows와 macOS 설치 안내](docs/local_setup.md)를 따라 Git과 Python 3를 준비합니다. GitHub Desktop은 선택 사항입니다.
-2. 새 비공개 저장소를 복제하고 Codex 로컬 프로젝트로 엽니다.
-3. AI는 [AGENTS.md](AGENTS.md)와 [SECURITY.md](SECURITY.md)를 확인하고 작업 범위·검사 명령을 설명합니다.
-4. Windows는 `py -3 tools/install_guard_hook.py`, macOS는 `python3 tools/install_guard_hook.py`로 이 복제본에 커밋 전 점검을 설치합니다.
-5. [Linear 작업 카드](docs/linear_tasks.md)의 작은 작업 하나를 팀 프로젝트에 등록하고 완료 기준을 합의합니다.
-6. 문서를 수정하고 커밋 후보 검사를 통과한 뒤 PR로 검토를 요청합니다.
-7. [기여도 기준](docs/contribution.md)에 따라 근거 기록을 확인하고 계산합니다.
+The repository skill is in `.agents/skills/team-project-start`. Reopen the project or start a new chat if discovery needs refreshing. It does not grant account access or invite teammates. It can explain in your preferred language; shared template documents are in English.
 
-## 팀원과 Codex 작업 기록 공유
+## Implemented versus manual
 
-[작업 기록 안내](docs/worklogs/README.md)에 따라 작업·결정·검증 결과와 다음 할 일을 요약합니다. 원본은 `.local-work`에만 두고 `tools/share_worklog.py`로 키·개인정보를 가린 Markdown 초안을 만듭니다.
+Implemented: local pattern checks, Git-index checks, an opt-in pre-commit hook, redacted worklog drafts, and arithmetic from approved contribution records.
 
-팀원이 로컬에서 확인한 뒤 `privacy_review: approved`로 표시하고 커밋 검사를 통과한 기록만 비공개 저장소의 `docs/worklogs`에서 공유합니다. 새 작업의 Codex는 관련 기록을 읽고 맥락을 이어받습니다. 원본·미승인 기록은 커밋 검사에서 중단되며, 도구가 자동 푸시하지 않습니다.
+Manual starter materials: agreement questionnaire, comparison prompt, approval records, issue map, and optional peer-review rubric. There is no agreement web app, automatic approval verification, live Linear monitoring, or automatic peer-score calculation. Actual team impact has not been measured.
 
-## 지침과 코드로 이중 확인
+## Install local checks
 
-- AGENTS.md: 작업 전 맥락·권한·민감정보·완료 보고 지침
-- tools/repo_guard.py: 작업 폴더가 아닌 Git index의 실제 커밋 후보 검사
-- 로컬 pre-commit 훅: 키·개인정보 패턴, 민감 파일, 필수 지침 누락 시 커밋 중단
-- GitHub Actions 예제: PR의 추적 파일 검사. 관리자가 필수 검사와 정책 변경 검토를 별도로 설정
+Windows: `py -3 tools/install_guard_hook.py`
 
-패턴 검사는 모든 개인정보·비밀을 찾지 못합니다. 로컬 훅은 우회 가능하며 PR 검사는 이미 푸시한 정보를 되돌리지 못합니다. CI와 필수 검사 설정은 팀 저장소에서 실제 작동을 확인하세요. Linear·AI 입력의 전송 차단과 상시 감시는 아직 구현하지 않았습니다.
+macOS: `python3 tools/install_guard_hook.py`
 
-## 가상 분석 예제
+Before committing selected files: `python3 tools/repo_guard.py --staged` (Windows: `py -3`). The guard reads the Git index, not unstaged working-tree copies. See [AGENTS.md](AGENTS.md) and [SECURITY.md](SECURITY.md).
 
-실행 명령과 출력 의미를 이 부분에 추가하는 것이 첫 문서 작업입니다. scripts/analyze.py는 data/synthetic.csv의 가상 자료 6행을 읽습니다. 실제 참여자 자료가 아니며 인과관계를 주장하지 않습니다.
+Hooks can be bypassed; PR CI runs after upload. Pattern checks do not prove that a file contains no secrets or personal data. Review changes locally and configure required checks and policy reviewers in each new repository.
 
-## 기여도 계산
+## First contribution exercise
 
-Windows: `py -3 tools/contribution_score.py`
+Improve this README by documenting how to run `scripts/analyze.py` from the repository root and what its output means. It reads six synthetic rows in `data/synthetic.csv`. Expanding the analysis or changing the data is outside this exercise.
 
-macOS: `python3 tools/contribution_score.py`
+## Contribution arithmetic
 
-커밋 수·코드 줄 수 대신 사전 합의한 작업 점수, 공동 기여 비율, 근거와 검토 완료 상태를 사용합니다. 성적·저자 순서·인사 평가를 자동 결정하지 않습니다. 자동 계산은 입력된 기록의 산술이며 근거의 진위를 자동 검증하지 않습니다.
+Run `python3 tools/contribution_score.py` (Windows: `py -3`). Use agreed activity points, credit shares, evidence, and independent acceptance, not commit counts or generated code volume. The synthetic example totals 80 accepted points: P01=25, P02=35, P03=20. It is not a grade or an authorship decision. Optional peer ratings are reported separately; see [the rubric](docs/peer_review.md).
 
-## 공개 범위와 재사용
+## Privacy, reuse, and inspiration
 
-모든 예제는 가상 자료입니다. 이 템플릿의 코드와 문서는 MIT 라이선스로 재사용할 수 있습니다. 생성한 비공개 프로젝트의 비공개 설정과 접근 권한은 팀이 관리합니다. 실제 연구 내용과 별도 저작물의 권리는 각 프로젝트에서 정합니다.
+Real team records belong only in your private project. Issues, invitations, Secrets, integrations, hooks, and required-check settings are not automatically copied. All public examples are synthetic. Code and original documentation are MIT licensed; project research and third-party materials retain their own rights.
+
+The workflow design was informed by [GUAM's collaboration documentation](docs/reference_review.md). No GUAM source code, benchmark results, or team-specific configuration is included.
