@@ -7,14 +7,14 @@ from pathlib import Path
 
 RULES = [
     ('demo_secret', 'block', re.compile(r'DEMO_SECRET_[A-Za-z0-9_]+')),
-    ('github_token', 'block', re.compile(r'\b(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})\b')),
-    ('api_token_shape', 'block', re.compile(r'\bsk-[A-Za-z0-9_-]{20,}\b')),
+    ('github_token', 'block', re.compile(r'(?<![A-Za-z0-9_])(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})(?![A-Za-z0-9_])')),
+    ('api_token_shape', 'block', re.compile(r'(?<![A-Za-z0-9_-])sk-[A-Za-z0-9_-]{20,}(?![A-Za-z0-9_-])')),
     ('bearer_token', 'block', re.compile(r'(?i)\bBearer[ \t]+[A-Za-z0-9._~+/-]{16,}=*')),
     ('url_credential', 'block', re.compile(r'(?i)(?:[?&](?:api[_-]?key|access[_-]?token|token|secret|password)=)[^\s&#"\'<>]+')),
-    ('jwt_shape', 'block', re.compile(r'\beyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\b')),
+    ('jwt_shape', 'block', re.compile(r'(?<![A-Za-z0-9_-])eyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+(?![A-Za-z0-9_-])')),
     ('private_key', 'block', re.compile(r'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----[\s\S]*?(?:-----END (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|\Z)')),
     ('credential_assignment', 'block', re.compile(r'''(?im)\b(?:api[_-]?key|access[_-]?token|client[_-]?secret|password)\b\s*[:=]\s*["']?(?!\s|\[|<|\$)[A-Za-z0-9_+/=.-]{8,}''')),
-    ('email', 'review', re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b')),
+    ('email', 'review', re.compile(r'(?<![A-Za-z0-9._%+-])[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?![A-Za-z0-9_.+-])')),
     ('kr_mobile', 'review', re.compile(r'(?<!\d)01[016789][- ]?\d{3,4}[- ]?\d{4}(?!\d)')),
     ('student_id_context', 'review', re.compile(r'(?:학번|student[_ ]?id)\s*[:=：]?\s*\d{4}[- ]?\d{5,6}', re.I)),
     ('local_user_path', 'review', re.compile(r'(?:[A-Za-z]:[\\/]Users[\\/][^\\/\s"\'<>]+|/(?:Users|home)/[^/\s"\'<>]+)')),
